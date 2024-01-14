@@ -1,0 +1,54 @@
+﻿@model Infinite_dungeon.Controllers.GameController.BattleViewModel
+
+@{
+    ViewData["Title"] = "Battle";
+}
+
+<h1>Battle</h1>
+
+<div class="row flex-top margin" style="padding: 5px;">
+    <div class="col-md-6">
+        <div class="card border margin-right margin-bottom">
+            <div class="card-body">
+                <h5 class="card-title">Character</h5>
+                <p class="card-text">Name: @Model.Character.Name</p>
+                <p class="card-text">Level: @Model.Character.Level</p>
+                <p class="card-text">Health: @Model.Character.HealthPoints / @Model.Character.MaxHealthPoints</p>
+                <!-- Add other character information here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card border margin-right margin-bottom">
+            <div class="card-body">
+                <h5 class="card-title">Enemy</h5>
+                <p class="card-text">Name: @Model.Enemy.Name</p>
+                <p class="card-text">Level: @Model.Enemy.Level</p>
+                <p class="card-text">Health: @Model.Enemy.HealthPoints</p>
+                <!-- Add other enemy information here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <h5>Actions</h5>
+
+        <!-- Option 1: Attack -->
+        <form asp-action="Battle" method="post">
+            <input type="hidden" name="option" value="1" />
+            <button type="submit" class="btn btn-primary">Attack</button>
+        </form>
+
+        <!-- Option 2: Heal -->
+        <form asp-action="Battle" method="post">
+            <input type="hidden" name="option" value="2" />
+            <button type="submit" class="btn btn-success">Heal</button>
+        </form>
+
+        <!-- Add other action buttons here based on equipped weapon -->
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+﻿@model Infinite_dungeon.Models.Enemy
+
+@{
+    ViewData["Title"] = "Dungeon";
+}
+
+<h1>Dungeon</h1>
+
+<p>You encounter a fearsome enemy!</p>
+<p>Name: @Model.Name</p>
+<p>Level: @Model.Level</p>
+<!-- Display other enemy information -->
+
+<form asp-action="Battle" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn-small">Fight!</button>
+</form>

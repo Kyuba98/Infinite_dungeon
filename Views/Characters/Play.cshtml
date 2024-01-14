@@ -1,0 +1,36 @@
+﻿@model Infinite_dungeon.Models.Character
+
+@{
+    ViewData["Title"] = "Play";
+}
+
+<h1 class="center">Go for adventure</h1>
+<hr />
+
+
+
+<div class="row flex-top margin" style="padding: 5px;">
+    
+    <div class="card border margin-right margin-bottom" style="width: 20rem; height: 15rem;">
+        <div class="card-body">
+            <h4 class="card-title">Shop</h4>
+            <p class="card-text">You can buy there powerfull weapons that will help you in battle but without money don't even come there.</p>
+            <a class="paper-btn" asp-action="Shop" asp-controller="Game">Go to Shop</a>
+        </div>
+    </div>
+    
+    <div class="card border" style="width: 20rem; height: 15rem;">
+        <div class="card-body">
+            <h4 class="card-title">Dungeon</h4>
+            <p class="card-text">A dungeon come if you aren't scared.</p>
+            <a class="paper-btn" asp-action="Dungeon" asp-controller="Game">Enter the dungeon!</a>
+        </div>
+    </div>
+
+    
+    <a asp-action="Index">Back to list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

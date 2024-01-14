@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Infinite_dungeon.Models.Character>
+
+@{
+    ViewData["Title"] = "Characters";
+}
+
+<h1>Characters list</h1>
+
+<div class="row flex-spaces child-borders">
+    <label class="paper-btn margin" for="modal-1">New character</label>
+</div>
+<input class="modal-state" id="modal-1" type="checkbox">
+<div class="modal">
+    <label class="modal-bg" for="modal-1"></label>
+    <div class="modal-body">
+        <label class="btn-close" for="modal-1">X</label>
+        <form action="@Url.Action("Create")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input type="text" name="name" class="form-control" />
+                <span class="text-danger">@Html.ValidationMessage("Name")</span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+    </div>
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th>
+                    Exp
+                </th>
+                <th>
+                    Health Points
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Attack)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Magic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Defense)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExperiencePoints) / @Html.DisplayFor(modelItem => item.MaxExperiencePoints)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HealthPoints) / @Html.DisplayFor(modelItem => item.MaxHealthPoints)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Magic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Defense)
+                    </td>
+                    <td>
+                        <button class="paper-btn" type="button" onclick="location.href='@Url.Action("Play", new {id = item.Id})'">Play</button>
+                        <label class="paper-btn" for="modal-@Html.DisplayFor(modelItem => item.Id)">Delete</label>
+                        <input class="modal-state" id="modal-@Html.DisplayFor(modelItem => item.Id)" type="checkbox">
+                        <div class="modal">
+                            <label class="modal-bg" for="modal-@Html.DisplayFor(modelItem => item.Id)"></label>
+                            <div class="modal-body" style="width:10rem;">
+                                <label class="btn-close" for="modal-@Html.DisplayFor(modelItem => item.Id)">X</label>
+                                <h3 class="modal-title">Delete</h3>
+                                <h4 class="modal-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                <p class="modal-text">Level @Html.DisplayFor(modelItem => item.Level)</p>
+                                <form action="@Url.Action("Delete", new { id = item.Id })" method="post">
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="submit" value="Delete" class="paper-btn btn-danger-outline" />
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

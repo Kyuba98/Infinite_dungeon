@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Infinite_dungeon</title>
+    <link rel="stylesheet" href="~/Infinite_dungeon.styles.css" asp-append-version="true" />
+    <link href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="border fixed split-nav">
+            <div class="nav-brand">
+                <h3><a asp-area="" asp-controller="Home" asp-action="Index">Infinite dungeon</a></h3>
+            </div>
+            <partial name="_LoginPartial" />
+        </nav>
+    </header>
+    <div class="paper container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Infinite_dungeon - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

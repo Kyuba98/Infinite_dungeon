@@ -1,0 +1,53 @@
+﻿@model Infinite_dungeon.Controllers.GameController.ShopViewModel
+
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<h1>Shop</h1>
+
+<p>Current Coins: @Model.Character.Coins</p>
+
+<table class="table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Damage</th>
+            <th>Magic Power</th>
+            <th>Defense Bonus</th>
+            <th>Cost</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var weapon in Model.WeaponsInShop)
+        {
+            <tr>
+                <td>@weapon.Name</td>
+                <td>@weapon.Damage</td>
+                <td>@weapon.MagicPower</td>
+                <td>@weapon.DefenseBonus</td>
+                <td>@weapon.Cost</td>
+                <td>@weapon.Type</td>
+                <td>
+                    @if (weapon.Cost > Model.Character.Coins)
+                    {
+                        <button class="btn-small disabled">Buy</button>
+                    }
+                    else
+                    {
+                    <form asp-action="Buy" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="weaponId" value="@weapon.Id" />
+                        <button type="submit" class="btn-small">Buy</button>
+                    </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" onclick="location.href='@Url.Action("Play", "Characters", new { id = Model.Character.Id })'">Go Back to Play</button>
+
