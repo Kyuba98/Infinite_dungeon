@@ -27,7 +27,8 @@ namespace Infinite_dungeon.Data
             // Seed weapons
             modelBuilder.Entity<Weapon>().HasData(
                 new Weapon("Sword", 5, 0, 10, 5, WeaponType.Sword) { Id = 1},
-                new Weapon("Short Bow", 15, 5, 0, 5, WeaponType.Bow) { Id = 2}
+                new Weapon("Short Bow", 15, 5, 0, 5, WeaponType.Bow) { Id = 2},
+                new Weapon("Magic Staff", 0, 15, 5, 5, WeaponType.Staff) { Id = 3}
             );
 
             modelBuilder.Entity<Enemy>().HasData(

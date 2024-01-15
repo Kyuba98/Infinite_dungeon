@@ -67,13 +67,9 @@ namespace Infinite_dungeon.Controllers
                 {
                     currentCharacter.Coins -= selectedWeapon.Cost;
 
-                    // If Inventory is a navigation property in Character, ensure it's loaded
-                    await _context.Entry(currentCharacter)
-                        .Collection(c => c.Inventory)
-                        .LoadAsync();
-
-                    currentCharacter.Inventory.Add(selectedWeapon);
-
+                    currentCharacter.Coins -= selectedWeapon.Cost;
+                    currentCharacter.Weapon = selectedWeapon; // Set the purchased weapon directly
+                    _context.Character.Entry(currentCharacter).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Shop));
@@ -102,7 +98,7 @@ namespace Infinite_dungeon.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Battle(BattleViewModel viewModel)
+        public async Task <IActionResult> Battle(BattleViewModel viewModel)
         {
             // Get data from session
             var enemyJson = HttpContext.Session.GetString("CurrentEnemy");
@@ -125,57 +121,73 @@ namespace Infinite_dungeon.Controllers
                 case 2: // Heal
                     if(character.Mana > 2)
                     {
+                        if(character.Magic < 1){
+                            character.HealthPoints += 1;
+                        }
                         character.HealthPoints += character.Magic;
                         if (character.HealthPoints > character.MaxHealthPoints)
                         {
                             character.HealthPoints = character.MaxHealthPoints;
                         }
+                        character.Mana -= 2;
                         actionDone = true;
                     }
                     break;
 
                 case 3: 
-                    if(character.Weapon!=null)
+                    if(character.Weapon!=null && character.Mana > 3)
                     {
-                        switch(character.Weapon.Type)
+                        int dmg = 0;
+                        switch (character.Weapon.Type)
                         {
                             case WeaponType.Sword:
-                                // Logic for Sword
+                                dmg = character.Attack * 2;
                                 break;
 
                             case WeaponType.Bow:
-                                // Logic for Bow
+                                dmg = character.Attack + character.Magic;
                                 break;
 
                             case WeaponType.Staff:
-                                // Logic for Staff
+                                dmg = character.Magic * 2;
                                 break;
+                            default: break;
                         }
+                        enemy.HealthPoints -= dmg;
+                        character.Mana -= 3;
+                        actionDone = true;
                     }
                     break;
 
                 case 4:
-                    if (character.Weapon != null)
+                    if (character.Weapon != null && character.Mana > 10)
                     {
+                        int dmg = 0;
                         switch (character.Weapon.Type)
                         {
                             case WeaponType.Sword:
-                                // Logic for Sword
+                                dmg = character.Attack * 4;
                                 break;
 
                             case WeaponType.Bow:
-                                // Logic for Bow
+                                dmg = character.Attack + (character.Magic * 3);
                                 break;
 
                             case WeaponType.Staff:
-                                // Logic for Staff
+                                dmg = character.Magic * 4;
                                 break;
+                            default: break;
                         }
+                        enemy.HealthPoints -= dmg;
+                        character.Mana -= 10;
+                        actionDone = true;
                     }
                     break;
             }
             if (actionDone)
             {
+                character.Mana +=(int)(1 + (character.Magic * 0.1));
+                if(character.Mana > character.MaxMana) character.Mana = character.MaxMana;
                 //Handle victory
                 if (enemy.HealthPoints <= 0) 
                 {
@@ -186,20 +198,40 @@ namespace Infinite_dungeon.Controllers
                     HttpContext.Session.SetInt32("EnemyLevel", enemy.Level);
                     enemy = GenerateRandomEnemy(enemy.Level);
                     HttpContext.Session.SetString("CurrentEnemy", JsonConvert.SerializeObject(enemy));
+                    _context.Character.Entry(character).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    actionDone = false;
                     viewModel = new BattleViewModel
                     {
                         Character = character,
-                        Enemy = enemy
+                        Enemy = enemy,
+                        Option = 0
                     };
                     return View(viewModel);
+                } else
+                {
+                    int dmg = enemy.Damage - character.Defense;
+                    if (dmg < 0) dmg = 1;
+                    character.HealthPoints -= dmg;
+                    //handle loss
+                    if(character.HealthPoints <= 0)
+                    {
+                        character.HealthPoints = character.MaxHealthPoints;
+                        _context.Character.Entry(character).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("Play", "Characters", new { id = character.Id });
+                    }
                 }
             }
-
+            actionDone = false;
+            _context.Character.Entry(character).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
             HttpContext.Session.SetString("CurrentEnemy", JsonConvert.SerializeObject(enemy));
             viewModel = new BattleViewModel
             {
                 Character = character,
-                Enemy = enemy
+                Enemy = enemy,
+                Option = 0
             };
             return View(viewModel);
         }
@@ -224,7 +256,10 @@ namespace Infinite_dungeon.Controllers
                 if (currentCharacterId.HasValue)
                 {
                     // Fetch the character from the database based on the retrieved ID
-                    return _context.Character.Find(currentCharacterId.Value);
+                    return _context.Character
+                        .Include(c => c.Weapon)    // Include weapon data
+                        .Include(c => c.Inventory) // Include inventory data
+                        .FirstOrDefault(c => c.Id == currentCharacterId.Value);
                 }
                 else
                 {

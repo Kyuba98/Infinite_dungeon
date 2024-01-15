@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infinite_dungeon.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240113203455_InitMigration")]
-    partial class InitMigration
+    [Migration("20240115000007_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace Infinite_dungeon.Data.Migrations
                     b.Property<int>("BaseMaxHealthPoints")
                         .HasColumnType("int");
 
+                    b.Property<int>("BaseMaxMana")
+                        .HasColumnType("int");
+
                     b.Property<int>("Coins")
                         .HasColumnType("int");
 
@@ -57,13 +60,16 @@ namespace Infinite_dungeon.Data.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
+                    b.Property<int>("Mana")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("WeaponId")
+                    b.Property<int?>("WeaponId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -89,6 +95,9 @@ namespace Infinite_dungeon.Data.Migrations
                     b.Property<int>("BaseHealthPoints")
                         .HasColumnType("int");
 
+                    b.Property<int>("HealthPoints")
+                        .HasColumnType("int");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -105,8 +114,18 @@ namespace Infinite_dungeon.Data.Migrations
                             Id = 1,
                             BaseDamage = 150,
                             BaseHealthPoints = 200,
+                            HealthPoints = 2,
                             Level = 1,
                             Name = "Goblin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BaseDamage = 200,
+                            BaseHealthPoints = 300,
+                            HealthPoints = 3,
+                            Level = 1,
+                            Name = "Chimera"
                         });
                 });
 
@@ -378,9 +397,7 @@ namespace Infinite_dungeon.Data.Migrations
 
                     b.HasOne("Infinite_dungeon.Models.Weapon", "Weapon")
                         .WithMany()
-                        .HasForeignKey("WeaponId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WeaponId");
 
                     b.Navigation("User");
 

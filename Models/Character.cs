@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infinite_dungeon.Models
 {
@@ -18,7 +19,7 @@ namespace Infinite_dungeon.Models
         public int Coins { get; set; } = 0;
         public virtual IdentityUser? User { get; set; }
         public virtual Weapon? Weapon { get; set; }
-        public virtual List<Weapon>? Inventory { get; set; }
+        public virtual List<Weapon>? Inventory { get; set; } = new List<Weapon>();
 
         public Character(string Name)
         {
@@ -96,4 +97,14 @@ namespace Infinite_dungeon.Models
             }
         }
     }
+
+    public class CharacterWeapon
+    {
+        public int CharacterId { get; set; }
+        public Character Character { get; set; }
+
+        public int WeaponId { get; set; }
+        public Weapon Weapon { get; set; }
+    }
+
 }

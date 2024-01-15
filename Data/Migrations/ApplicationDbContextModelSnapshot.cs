@@ -181,6 +181,16 @@ namespace Infinite_dungeon.Data.Migrations
                             MagicPower = 5,
                             Name = "Short Bow",
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cost = 5,
+                            Damage = 0,
+                            DefenseBonus = 5,
+                            MagicPower = 15,
+                            Name = "Magic Staff",
+                            Type = 2
                         });
                 });
 

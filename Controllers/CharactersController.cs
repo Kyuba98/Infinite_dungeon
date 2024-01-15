@@ -32,25 +32,6 @@ namespace Infinite_dungeon.Controllers
             return View(await _context.Character.ToListAsync());
         }
 
-        // GET: Characters/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _context.Character
-                .Include(c => c.Weapon)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-
-            return View(character);
-        }
-
         // GET: Characters/Create
         public IActionResult Create()
         {
@@ -94,6 +75,13 @@ namespace Infinite_dungeon.Controllers
             return View(character);
         }
 
+        public async Task<IActionResult> Inventory()
+        {
+            int? characterId = HttpContext.Session.GetInt32("CurrentCharacterId");
+            Character character = _context.Character.Find(characterId);
+            return View(character);
+        }
+
         // GET: Characters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -117,15 +105,22 @@ namespace Infinite_dungeon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.FindAsync(id);
-            if (character != null)
+            var character = await _context.Character
+                .Include(c => c.Inventory)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (character == null)
             {
-                _context.Character.Remove(character);
+                return NotFound();
             }
+
+            // Remove the character
+            _context.Character.Remove(character);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool CharacterExists(int id)
         {

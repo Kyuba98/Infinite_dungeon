@@ -8,6 +8,32 @@
 
 <p>Current Coins: @Model.Character.Coins</p>
 
+<div class="card">
+    <div class="card-body">
+        @if (Model.Character.Weapon != null)
+        {
+            <h5 class="card-title">@Model.Character.Weapon?.Name</h5>
+        }
+        else
+        {
+            <h5 class="card-title">You don't have weapon'</h5>
+        }
+
+
+        <p class="card-text">
+            @if (Model.Character.Weapon != null)
+            {
+                <ul class="inline">
+                    <li>Damage: @Model.Character.Weapon.Damage</li>
+                    <li>Magic Power: @Model.Character.Weapon.MagicPower</li>
+                    <li>Defense Bonus: @Model.Character.Weapon.DefenseBonus</li>
+                    <li>Type: @Model.Character.Weapon.Type</li>
+                </ul>
+            }
+        </p>
+    </div>
+</div>
+
 <table class="table-hover">
     <thead>
         <tr>

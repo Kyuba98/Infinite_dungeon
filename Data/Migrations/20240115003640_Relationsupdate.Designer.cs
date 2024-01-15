@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infinite_dungeon.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240114211703_enemyModelUpdate")]
-    partial class enemyModelUpdate
+    [Migration("20240115003640_Relationsupdate")]
+    partial class Relationsupdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,16 @@ namespace Infinite_dungeon.Data.Migrations
                             MagicPower = 5,
                             Name = "Short Bow",
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cost = 5,
+                            Damage = 0,
+                            DefenseBonus = 5,
+                            MagicPower = 15,
+                            Name = "Magic Staff",
+                            Type = 2
                         });
                 });
 
