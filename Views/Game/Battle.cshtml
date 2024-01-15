@@ -37,34 +37,34 @@
             <input type="hidden" name="option" value="1" />
             <button type="submit" class="btn btn-primary">Attack</button>
         </form>
-        @if(Model.Character.Mana < 2)
+        @if(Model.Character.Mana < 25)
         {
-            <button type="submit" class="btn btn-success" disabled>Heal (2)</button>
+            <button type="submit" class="btn btn-success" disabled>Heal (25)</button>
         }
         else
         {
             <!-- Option 2: Heal -->
             <form asp-action="Battle" method="post">
                 <input type="hidden" name="option" value="2" />
-                <button type="submit" class="btn btn-success">Heal (2)</button>
+                <button type="submit" class="btn btn-success">Heal (25)</button>
             </form>
         }
 
 
     @if (Model.Character.Weapon != null)
     {
-        if (Model.Character.Mana < 3)
+        if (Model.Character.Mana < 25)
         {
             switch (Model.Character.Weapon.Type)
             {
                 case WeaponType.Sword:
-                    <button type="button" class="btn btn-danger" disabled>Double slash (3)</button>
+                    <button type="button" class="btn btn-danger" disabled>Double slash (25)</button>
                     break;
                 case WeaponType.Bow:
-                    <button type="button" class="btn btn-danger" disabled>Enchanted Shot (3)</button>
+                    <button type="button" class="btn btn-danger" disabled>Enchanted Shot (25)</button>
                     break;
                 case WeaponType.Staff:
-                    <button type="button" class="btn btn-danger" disabled>Magic Shot (3)</button>
+                    <button type="button" class="btn btn-danger" disabled>Magic Shot (25)</button>
                     break;
             }
         }
@@ -75,35 +75,35 @@
                 case WeaponType.Sword:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="3" />
-                        <button type="submit" class="btn btn-danger">Double slash (3)</button>
+                        <button type="submit" class="btn btn-danger">Double slash (25)</button>
                     </form>
                     break;
                 case WeaponType.Bow:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="3" />
-                        <button type="submit" class="btn btn-danger">Enchanted Shot (3)</button>
+                        <button type="submit" class="btn btn-danger">Enchanted Shot (25)</button>
                     </form>
                     break;
                 case WeaponType.Staff:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="3" />
-                        <button type="submit" class="btn btn-danger">Magic Shot (3)</button>
+                        <button type="submit" class="btn btn-danger">Magic Shot (25)</button>
                     </form>
                     break;
             }
         }
-        if (Model.Character.Mana < 10)
+        if (Model.Character.Mana < 100)
         {
             switch (Model.Character.Weapon.Type)
             {
                 case WeaponType.Sword:
-                    <button type="button" class="btn btn-danger" disabled>Sword spin (10)</button>
+                    <button type="button" class="btn btn-danger" disabled>Sword spin (100)</button>
                     break;
                 case WeaponType.Bow:
-                    <button type="button" class="btn btn-danger" disabled>Enchanted Triple Shot (10)</button>
+                    <button type="button" class="btn btn-danger" disabled>Enchanted Triple Shot (100)</button>
                     break;
                 case WeaponType.Staff:
-                    <button type="button" class="btn btn-danger" disabled>Fire Ball (10)</button>
+                    <button type="button" class="btn btn-danger" disabled>Fire Ball (100)</button>
                     break;
             }
         }
@@ -114,19 +114,19 @@
                 case WeaponType.Sword:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="4" />
-                        <button type="submit" class="btn btn-danger">Sword spin (10)</button>
+                        <button type="submit" class="btn btn-danger">Sword spin (100)</button>
                     </form>
                     break;
                 case WeaponType.Bow:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="4" />
-                        <button type="submit" class="btn btn-danger">Enchanted Shot (10)</button>
+                        <button type="submit" class="btn btn-danger">Enchanted Shot (100)</button>
                     </form>
                     break;
                 case WeaponType.Staff:
                     <form asp-action="Battle" method="post">
                         <input type="hidden" name="option" value="4" />
-                        <button type="submit" class="btn btn-danger">Magic Shot (10)</button>
+                        <button type="submit" class="btn btn-danger">Magic Shot (100)</button>
                     </form>
                     break;
             }

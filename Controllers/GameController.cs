@@ -119,7 +119,7 @@ namespace Infinite_dungeon.Controllers
                     break;
 
                 case 2: // Heal
-                    if(character.Mana > 2)
+                    if(character.Mana > 25)
                     {
                         if(character.Magic < 1){
                             character.HealthPoints += 1;
@@ -129,13 +129,13 @@ namespace Infinite_dungeon.Controllers
                         {
                             character.HealthPoints = character.MaxHealthPoints;
                         }
-                        character.Mana -= 2;
+                        character.Mana -= 25;
                         actionDone = true;
                     }
                     break;
 
                 case 3: 
-                    if(character.Weapon!=null && character.Mana > 3)
+                    if(character.Weapon!=null && character.Mana > 25)
                     {
                         int dmg = 0;
                         switch (character.Weapon.Type)
@@ -154,13 +154,13 @@ namespace Infinite_dungeon.Controllers
                             default: break;
                         }
                         enemy.HealthPoints -= dmg;
-                        character.Mana -= 3;
+                        character.Mana -= 25;
                         actionDone = true;
                     }
                     break;
 
                 case 4:
-                    if (character.Weapon != null && character.Mana > 10)
+                    if (character.Weapon != null && character.Mana > 100)
                     {
                         int dmg = 0;
                         switch (character.Weapon.Type)
@@ -179,7 +179,7 @@ namespace Infinite_dungeon.Controllers
                             default: break;
                         }
                         enemy.HealthPoints -= dmg;
-                        character.Mana -= 10;
+                        character.Mana -= 100;
                         actionDone = true;
                     }
                     break;
@@ -217,6 +217,7 @@ namespace Infinite_dungeon.Controllers
                     if(character.HealthPoints <= 0)
                     {
                         character.HealthPoints = character.MaxHealthPoints;
+                        character.Mana = 0;
                         _context.Character.Entry(character).State = EntityState.Modified;
                         await _context.SaveChangesAsync();
                         return RedirectToAction("Play", "Characters", new { id = character.Id });

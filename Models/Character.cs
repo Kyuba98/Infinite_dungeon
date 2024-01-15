@@ -85,7 +85,7 @@ namespace Infinite_dungeon.Models
 
         public int MaxExperiencePoints
         {
-            get { return (int)(1000 * (Level * 0.01)); }
+            get { return (int)(1500 * (Level * 0.1)); }
         }
 
         public void LevelUp()
@@ -96,15 +96,6 @@ namespace Infinite_dungeon.Models
                 Level++;
             }
         }
-    }
-
-    public class CharacterWeapon
-    {
-        public int CharacterId { get; set; }
-        public Character Character { get; set; }
-
-        public int WeaponId { get; set; }
-        public Weapon Weapon { get; set; }
     }
 
 }
