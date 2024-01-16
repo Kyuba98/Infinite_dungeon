@@ -20,22 +20,6 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card border margin-right margin-bottom">
-            <div class="card-body">
-                <h5 class="card-title">@Model.Character.Name</h5>
-                <div class="progress" style="width:10rem;">
-                    <div class="bar success" style="width: @((double)(Model.Character.HealthPoints / Model.Character.MaxHealthPoints) * 100)%;"></div>
-                </div>
-                <h5 class="card-title">@Model.Enemy.Name</h5>
-                <div class="progress" style="width:10rem;">
-                    <div class="bar danger" style="width: @((double)(Model.Enemy.HealthPoints / Model.Enemy.MaxHealthPoints) * 100)%;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="col-md-3" style="height:fit-content">
         <div class="card border margin-right margin-bottom">
             <div class="card-body">

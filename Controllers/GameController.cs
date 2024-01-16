@@ -234,6 +234,7 @@ namespace Infinite_dungeon.Controllers
                 Enemy = enemy,
                 Option = 0
             };
+            
             return View(viewModel);
         }
 
