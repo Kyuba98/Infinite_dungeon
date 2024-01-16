@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infinite_dungeon.Data.Migrations
+namespace Infinite_dungeon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115213416_NewWeaponsEnemies")]
-    partial class NewWeaponsEnemies
+    [Migration("20240116182111_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

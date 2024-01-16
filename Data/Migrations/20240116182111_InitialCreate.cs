@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Infinite_dungeon.Data.Migrations
+namespace Infinite_dungeon.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

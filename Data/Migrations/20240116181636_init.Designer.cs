@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infinite_dungeon.Data.Migrations
+namespace Infinite_dungeon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115000007_init")]
+    [Migration("20240116181636_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -126,6 +126,123 @@ namespace Infinite_dungeon.Data.Migrations
                             HealthPoints = 3,
                             Level = 1,
                             Name = "Chimera"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BaseDamage = 150,
+                            BaseHealthPoints = 250,
+                            HealthPoints = 2,
+                            Level = 1,
+                            Name = "Orc"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BaseDamage = 120,
+                            BaseHealthPoints = 180,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Skeleton"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BaseDamage = 120,
+                            BaseHealthPoints = 280,
+                            HealthPoints = 2,
+                            Level = 1,
+                            Name = "Troll"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BaseDamage = 200,
+                            BaseHealthPoints = 180,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Witch"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BaseDamage = 150,
+                            BaseHealthPoints = 400,
+                            HealthPoints = 4,
+                            Level = 1,
+                            Name = "Dragon"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BaseDamage = 80,
+                            BaseHealthPoints = 120,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Slime"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BaseDamage = 100,
+                            BaseHealthPoints = 350,
+                            HealthPoints = 3,
+                            Level = 1,
+                            Name = "Cyclops"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BaseDamage = 200,
+                            BaseHealthPoints = 150,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Ghost"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BaseDamage = 120,
+                            BaseHealthPoints = 280,
+                            HealthPoints = 2,
+                            Level = 1,
+                            Name = "Werewolf"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BaseDamage = 180,
+                            BaseHealthPoints = 200,
+                            HealthPoints = 2,
+                            Level = 1,
+                            Name = "Harpy"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BaseDamage = 200,
+                            BaseHealthPoints = 180,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Mummy"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BaseDamage = 240,
+                            BaseHealthPoints = 160,
+                            HealthPoints = 1,
+                            Level = 1,
+                            Name = "Banshee"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BaseDamage = 100,
+                            BaseHealthPoints = 320,
+                            HealthPoints = 3,
+                            Level = 1,
+                            Name = "Minotaur"
                         });
                 });
 
@@ -168,22 +285,122 @@ namespace Infinite_dungeon.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Cost = 5,
+                            Cost = 50,
                             Damage = 5,
-                            DefenseBonus = 10,
+                            DefenseBonus = 15,
                             MagicPower = 0,
-                            Name = "Sword",
+                            Name = "Iron Sword",
                             Type = 0
                         },
                         new
                         {
                             Id = 2,
-                            Cost = 5,
+                            Cost = 50,
                             Damage = 15,
                             DefenseBonus = 0,
                             MagicPower = 5,
-                            Name = "Short Bow",
+                            Name = "Wooden Bow",
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cost = 50,
+                            Damage = 0,
+                            DefenseBonus = 5,
+                            MagicPower = 15,
+                            Name = "Novice Staff",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Cost = 250,
+                            Damage = 12,
+                            DefenseBonus = 25,
+                            MagicPower = 0,
+                            Name = "Steel Sword",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Cost = 250,
+                            Damage = 25,
+                            DefenseBonus = 0,
+                            MagicPower = 12,
+                            Name = "Reinforced Bow",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Cost = 250,
+                            Damage = 0,
+                            DefenseBonus = 12,
+                            MagicPower = 25,
+                            Name = "Adept Staff",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Cost = 500,
+                            Damage = 25,
+                            DefenseBonus = 50,
+                            MagicPower = 0,
+                            Name = "Golden Sword",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Cost = 500,
+                            Damage = 50,
+                            DefenseBonus = 0,
+                            MagicPower = 25,
+                            Name = "Master Archer Bow",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Cost = 500,
+                            Damage = 0,
+                            DefenseBonus = 25,
+                            MagicPower = 50,
+                            Name = "Enchanter's Staff",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Cost = 1000,
+                            Damage = 50,
+                            DefenseBonus = 100,
+                            MagicPower = 25,
+                            Name = "Legendary Sword",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Cost = 1000,
+                            Damage = 100,
+                            DefenseBonus = 25,
+                            MagicPower = 50,
+                            Name = "Dragon's Breath Bow",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Cost = 1000,
+                            Damage = 25,
+                            DefenseBonus = 50,
+                            MagicPower = 100,
+                            Name = "Archmage's Staff",
+                            Type = 2
                         });
                 });
 
