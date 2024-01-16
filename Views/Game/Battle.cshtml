@@ -6,20 +6,37 @@
 
 <h1>Battle</h1>
 
-<div class="row flex-top margin" style="padding: 5px;">
-    <div class="col-md-6">
+<div class="row flex-top margin" style="padding: 5px; justify-content:center;">
+    <div class="col-md-3">
         <div class="card border margin-right margin-bottom">
             <div class="card-body">
                 <h5 class="card-title">@Model.Character.Name</h5>
                 <p class="card-text">Level: @Model.Character.Level</p>
                 <p class="card-text">Health: @Model.Character.HealthPoints / @Model.Character.MaxHealthPoints</p>
                 <p class="card-text">Mana: @Model.Character.Mana / @Model.Character.MaxMana</p>
+                <p class="card-text">Exp: @Model.Character.ExperiencePoints / @Model.Character.MaxExperiencePoints</p>
                 <!-- Add other character information here -->
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-3">
+        <div class="card border margin-right margin-bottom">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Character.Name</h5>
+                <div class="progress" style="width:10rem;">
+                    <div class="bar success" style="width: @((double)(Model.Character.HealthPoints / Model.Character.MaxHealthPoints) * 100)%;"></div>
+                </div>
+                <h5 class="card-title">@Model.Enemy.Name</h5>
+                <div class="progress" style="width:10rem;">
+                    <div class="bar danger" style="width: @((double)(Model.Enemy.HealthPoints / Model.Enemy.MaxHealthPoints) * 100)%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3" style="height:fit-content">
         <div class="card border margin-right margin-bottom">
             <div class="card-body">
                 <h5 class="card-title">@Model.Enemy.Name</h5>
@@ -31,7 +48,7 @@
     </div>
 </div>
 
-<div class="row mt-3 margin-right margin-bottom">
+<div class="row mt-3 margin-right margin-bottom" style="justify-content:center;">
         <!-- Option 1: Attack -->
         <form asp-action="Battle" method="post">
             <input type="hidden" name="option" value="1" />

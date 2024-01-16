@@ -85,7 +85,7 @@ namespace Infinite_dungeon.Models
 
         public int MaxExperiencePoints
         {
-            get { return (int)(1500 * (Level * 0.1)); }
+            get { return (int)(2000 * (Level * 0.01)); }
         }
 
         public void LevelUp()
