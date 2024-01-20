@@ -9,11 +9,11 @@
 <div class="row flex-spaces child-borders">
     <label class="paper-btn margin" for="modal-1">New character</label>
 </div>
-<input class="modal-state" id="modal-1" type="checkbox">
+<input class="modal-state" id="modal" type="checkbox">
 <div class="modal">
-    <label class="modal-bg" for="modal-1"></label>
+    <label class="modal-bg" for="modal"></label>
     <div class="modal-body">
-        <label class="btn-close" for="modal-1">X</label>
+        <label class="btn-close" for="modal">X</label>
         <form action="@Url.Action("Create")" method="post">
             @Html.AntiForgeryToken()
 
