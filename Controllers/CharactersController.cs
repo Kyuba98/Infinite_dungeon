@@ -9,6 +9,7 @@ using Infinite_dungeon.Data;
 using Infinite_dungeon.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Infinite_dungeon.Controllers
 {
@@ -32,12 +33,6 @@ namespace Infinite_dungeon.Controllers
             return View(await _context.Character.ToListAsync());
         }
 
-        // GET: Characters/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Characters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -55,48 +50,24 @@ namespace Infinite_dungeon.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Characters/Play/5
         public async Task<IActionResult> Play(int? id)
         {
+            IdentityUser currentUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
 
             var character = await _context.Character.FindAsync(id);
-            if (character == null)
+            if (character == null || character.User != currentUser)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
             HttpContext.Session.SetInt32("CurrentCharacterId", character.Id);
-            return View(character);
-        }
-
-        public async Task<IActionResult> Inventory()
-        {
-            int? characterId = HttpContext.Session.GetInt32("CurrentCharacterId");
-            Character character = _context.Character.Find(characterId);
-            return View(character);
-        }
-
-        // GET: Characters/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _context.Character
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-
             return View(character);
         }
 
@@ -111,7 +82,7 @@ namespace Infinite_dungeon.Controllers
 
             if (character == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
 
             // Remove the character
