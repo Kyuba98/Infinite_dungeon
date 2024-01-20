@@ -119,7 +119,7 @@ namespace Infinite_dungeon.Controllers
                     break;
 
                 case 2: // Heal
-                    if(character.Mana > 25)
+                    if(character.Mana >= 25)
                     {
                         if(character.Magic < 1){
                             character.HealthPoints += 1;
@@ -135,7 +135,7 @@ namespace Infinite_dungeon.Controllers
                     break;
 
                 case 3: 
-                    if(character.Weapon!=null && character.Mana > 25)
+                    if(character.Weapon!=null && character.Mana >= 25)
                     {
                         int dmg = 0;
                         switch (character.Weapon.Type)
@@ -160,7 +160,7 @@ namespace Infinite_dungeon.Controllers
                     break;
 
                 case 4:
-                    if (character.Weapon != null && character.Mana > 100)
+                    if (character.Weapon != null && character.Mana >= 100)
                     {
                         int dmg = 0;
                         switch (character.Weapon.Type)

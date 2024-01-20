@@ -30,7 +30,7 @@ namespace Infinite_dungeon.Controllers
         {
             IdentityUser user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var aplicationDbContext = _context.Character.Where(c => c.User.Id == user.Id).Include(c => c.User).Include(c => c.Weapon);
-            return View(await _context.Character.ToListAsync());
+            return View(aplicationDbContext);
         }
 
         // POST: Characters/Create
